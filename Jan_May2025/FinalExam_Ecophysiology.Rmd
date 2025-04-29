@@ -1,0 +1,162 @@
+---
+title: "Plant Ecophysiology FInal Exam-v1"
+notes: total 200 marks (bonus marks 20)
+output:
+  html_document: default
+  pdf_document: default
+date: "2025-04-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Soybean Growth Simulations Using Default Parameters and Input (Soil/Climate) Drivers
+Here I am loading R package BioCro and running simulations to grow soybean using default weather and soil data in the package.
+Additionally all the parameters and modules are already set up
+
+```{r cars}
+library(BioCro)
+library(lattice)
+library(knitr)
+result <- with(soybean, {run_biocro(
+  initial_values,
+  parameters,
+  soybean_weather$'2002',
+  direct_modules,
+  differential_modules,
+  ode_solver
+)})
+xyplot(Stem + Leaf + Root + lai + Grain ~ TTc, data = result, type='l', auto = TRUE)
+```
+
+You can see that X-axix is TTc (instead of days or time). This variable (TTc) is thermal time and it is a different way to express time in thermal units. Thermal time measures how much useful warmth a plant experiences over time. It's calculated by summing the daily temperatures that exceed a certain base temperature (the minimum temperature required for growth). This accumulation is typically expressed in degree-days
+## Initial Conditions and Input Drivers Required for running Soybean Simulations
+
+
+You can see that several inputs are required to run the simulations. The initial_values list contains the starting values for all parameters that need to be initialized—for example, the initial soil moisture level. The parameters list includes the values of all model parameters necessary for running the simulation, such as Vcmax, which represents the maximum carboxylation rate of Rubisco at 25°C.
+
+The data frame soybean_weather$'2002' provides the environmental input data (weather drivers) for the simulation. The direct and differential modules contain a set of sub-models (e.g., for simulating photosynthesis, light interception, etc.) that together represent whole-plant growth dynamics.
+
+The ode_solver component allows you to select a numerical method for solving the system of ordinary differential equations (ODEs), which are used to model the time-evolving behavior of plant growth.
+
+```{r, echo=TRUE}
+#initial value of soil moisture
+initial_soil_moisture <- soybean$initial_values$soil_water_content
+#maximum carboxylation rate of rubisco
+Vmax <- soybean$parameters$vmax1
+#Weather driver
+head(soybean_weather$'2002')
+#Module to describe partitioning coefficients
+soybean$direct_modules$partitioning_coefficients
+```
+
+## Getting more information abour module governing partitioning coefficients
+
+As you can see that the module used for simulating partitioning process is partitioning_coefficient_logistic. 
+
+
+To get more details about the partitioning module use function module_info
+```{r, echo=TRUE}
+module_info("BioCro:partitioning_coefficient_logistic")
+```
+The module partitioning_coefficient_logistic takes ten input parameters (e.g., DVI, alphaRoot, alphaStem, etc.) and produces six output variables (kRoot, kStem, etc.), calculated at each time step. At any given time, the sum of all k values equals 1, ensuring mass balance in carbon allocation.
+
+For example, if kRoot = 1 at a particular time step, it means that 100% of the assimilated carbon (via photosynthesis) is allocated to root growth, and no carbon is allocated to other components like stems or leaves.
+
+To understand how parameters like alphaRoot, alphaStem, etc., influence the values of kRoot, kStem, and others, refer to the following paper:
+🔗 https://gmd.copernicus.org/articles/8/1139/2015/
+
+You can also try modifying the parameter values to experiment and observe how the output allocation changes over time.
+
+```{r, echo=TRUE}
+parameters_with_modified_partitioning <- soybean$parameters
+parameters_with_modified_partitioning$alphaLeaf = 30 # original value was 23.8895
+parameters_with_modified_partitioning$betaLeaf = -20 # original value was -18.0851
+parameters_with_modified_partitioning$alphaStem = 30 # original value was 24.8248
+parameters_with_modified_partitioning$betaStem = -20 # original value was  -18.5214
+parameters_with_modified_partitioning$alphaRoot = 30 # original value was 36.967
+parameters_with_modified_partitioning$betaRoot = -20 # original value was  -40.1915
+parameters_with_modified_partitioning$alphaShell = 30 # original value was 13.5955
+parameters_with_modified_partitioning$betaShell = -20 # original value was  -9.9809
+
+result_modified <- result <- with(soybean, {run_biocro(
+  initial_values,
+  parameters = parameters_with_modified_partitioning,
+  soybean_weather$'2002',
+  direct_modules,
+  differential_modules,
+  ode_solver
+)})
+xyplot(Stem + Leaf + Root + lai + Grain ~ TTc, data = result_modified, type='l', auto = TRUE)
+```
+
+You can see that the results differ significantly. This variation is due to changes in the parameters controlling the biomass partitioning modules, while all other parameters (e.g., those related to photosynthesis, etc.) remain unchanged.
+
+
+
+## Problem Statement
+
+Compare the performance of two different algorithms (from separate R packages) in optimizing the parameters—alphaLeaf, betaLeaf, alphaStem, betaStem, alphaRoot, betaRoot, alphaShell, and betaShell—to achieve the best match between the model predictions and the observed values provided below.
+
+```{r, echo=TRUE}
+observations <- read.csv("~/observed_data.csv")
+print(observations)
+```
+
+To proceed, you’ll need to define an objective function that calculates the error between observed data and model predictions generated by run_biocro. Then, use optimization techniques to minimize this error by tuning the parameters. You are encouraged to experiment with different optimization algorithms to evaluate and compare their effectiveness in identifying the best-fit parameter values.
+
+A list of optimization packages available on CRAN can be found here:
+https://cran.r-project.org/web/views/Optimization.html
+
+### Parvat
+
+1. NMOF
+2. nloptr
+
+### Swadha
+1. roptim 
+2. dfoptim
+
+### Mausumi
+1. GenSA 
+2. graDiEnt
+
+## Evaluation Guidelines
+Evaluation will be based on a small report. The report should contain
+
+### Brief Introduction to the Problem – [20 Marks]
+Provide a short summary of the problem in your own words. Explain the objective of the parameter optimization task and its relevance to improving model accuracy.
+
+### Description of Two Optimization Algorithms – [30 Marks + 30 Marks]
+Clearly describe the two optimization algorithms you have selected (from different R packages). Include a brief explanation of how each algorithm works and why it is suitable for this problem.
+
+### Code Readability and Reproducibility – [30 Marks + 30 Marks]
+Your R scripts should be well-documented, logically structured, and easy to execute. The results should be fully reproducible, with clear instructions or comments.
+
+### Figure: Error Evolution Over Time or Iterations – [30 Marks]
+Include a plot showing how the error (objective function value) changes over computational time or iterations for both algorithms. This demonstrates algorithm efficiency and convergence behavior.
+
+### Figure: Final Optimized Parameter Values – [30 Marks]
+Present a visual comparison (e.g., bar chart or radar plot) of the final optimized parameter values obtained from the two algorithms.
+
+### Creative Element – [Bonus: 20 Marks (beyond the total of 200 marks)]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

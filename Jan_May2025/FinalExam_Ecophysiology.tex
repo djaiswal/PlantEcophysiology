@@ -1,0 +1,382 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Plant Ecophysiology FInal Exam},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Plant Ecophysiology FInal Exam}
+\author{}
+\date{\vspace{-2.5em}2025-04-29}
+
+\begin{document}
+\maketitle
+
+\subsection{Soybean Growth Simulations Using Default Parameters and
+Input (Soil/Climate)
+Drivers}\label{soybean-growth-simulations-using-default-parameters-and-input-soilclimate-drivers}
+
+Here I am loading R package BioCro and running simulations to grow
+soybean using default weather and soil data in the package. Additionally
+all the parameters and modules are already set up
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(BioCro)}
+\FunctionTok{library}\NormalTok{(lattice)}
+\FunctionTok{library}\NormalTok{(knitr)}
+\NormalTok{result }\OtherTok{\textless{}{-}} \FunctionTok{with}\NormalTok{(soybean, \{}\FunctionTok{run\_biocro}\NormalTok{(}
+\NormalTok{  initial\_values,}
+\NormalTok{  parameters,}
+\NormalTok{  soybean\_weather}\SpecialCharTok{$}\StringTok{\textquotesingle{}2002\textquotesingle{}}\NormalTok{,}
+\NormalTok{  direct\_modules,}
+\NormalTok{  differential\_modules,}
+\NormalTok{  ode\_solver}
+\NormalTok{)\})}
+\FunctionTok{xyplot}\NormalTok{(Stem }\SpecialCharTok{+}\NormalTok{ Leaf }\SpecialCharTok{+}\NormalTok{ Root }\SpecialCharTok{+}\NormalTok{ lai }\SpecialCharTok{+}\NormalTok{ Grain }\SpecialCharTok{\textasciitilde{}}\NormalTok{ TTc, }\AttributeTok{data =}\NormalTok{ result, }\AttributeTok{type=}\StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{, }\AttributeTok{auto =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{FinalExam_Ecophysiology_files/figure-latex/cars-1.pdf}
+You can see that X-axix is TTc (instead of days or time). This variable
+(TTc) is thermal time and it is a different way to express time in
+thermal units. Thermal time measures how much useful warmth a plant
+experiences over time. It's calculated by summing the daily temperatures
+that exceed a certain base temperature (the minimum temperature required
+for growth). This accumulation is typically expressed in degree-days
+\#\# Initial Conditions and Input Drivers Required for running Soybean
+Simulations
+
+You can see that several inputs are required to run the simulations. The
+initial\_values list contains the starting values for all parameters
+that need to be initialized---for example, the initial soil moisture
+level. The parameters list includes the values of all model parameters
+necessary for running the simulation, such as Vcmax, which represents
+the maximum carboxylation rate of Rubisco at 25°C.
+
+The data frame soybean\_weather\$`2002' provides the environmental input
+data (weather drivers) for the simulation. The direct and differential
+modules contain a set of sub-models (e.g., for simulating
+photosynthesis, light interception, etc.) that together represent
+whole-plant growth dynamics.
+
+The ode\_solver component allows you to select a numerical method for
+solving the system of ordinary differential equations (ODEs), which are
+used to model the time-evolving behavior of plant growth.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#initial value of soil moisture}
+\NormalTok{initial\_soil\_moisture }\OtherTok{\textless{}{-}}\NormalTok{ soybean}\SpecialCharTok{$}\NormalTok{initial\_values}\SpecialCharTok{$}\NormalTok{soil\_water\_content}
+\CommentTok{\#maximum carboxylation rate of rubisco}
+\NormalTok{Vmax }\OtherTok{\textless{}{-}}\NormalTok{ soybean}\SpecialCharTok{$}\NormalTok{parameters}\SpecialCharTok{$}\NormalTok{vmax1}
+\CommentTok{\#Weather driver}
+\FunctionTok{head}\NormalTok{(soybean\_weather}\SpecialCharTok{$}\StringTok{\textquotesingle{}2002\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      year doy hour   zen solar netsolar dw_solar up_solar temp   rh windspeed
+## 3625 2002 152    0 117.0     0     0.00      0.0     0.00 23.7 0.48     1.060
+## 3626 2002 152    1 114.0     0     0.00      0.0     0.00 23.0 0.56     1.180
+## 3627 2002 152    2 108.0     0     0.00      0.0     0.00 22.6 0.61     0.665
+## 3628 2002 152    3 100.0     0     0.01      0.0     0.00 21.7 0.72     2.170
+## 3629 2002 152    4  90.5    24     9.78     10.3     3.96 20.9 0.68     3.230
+## 3630 2002 152    5  80.3    60    20.80     23.0     6.49 20.9 0.70     2.720
+##      precip day_length time_zone_offset
+## 3625      0       14.3               -6
+## 3626      0       14.3               -6
+## 3627      0       14.3               -6
+## 3628      0       14.3               -6
+## 3629      0       14.3               -6
+## 3630      0       14.4               -6
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#Module to describe partitioning coefficients}
+\NormalTok{soybean}\SpecialCharTok{$}\NormalTok{direct\_modules}\SpecialCharTok{$}\NormalTok{partitioning\_coefficients}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "BioCro:partitioning_coefficient_logistic"
+\end{verbatim}
+
+\subsection{Getting more information abour module governing partitioning
+coefficients}\label{getting-more-information-abour-module-governing-partitioning-coefficients}
+
+As you can see that the module used for simulating partitioning process
+is partitioning\_coefficient\_logistic.
+
+To get more details about the partitioning module use function
+module\_info
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{module\_info}\NormalTok{(}\StringTok{"BioCro:partitioning\_coefficient\_logistic"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## 
+## Module name:
+##   partitioning_coefficient_logistic
+## 
+## Module input quantities:
+##   DVI
+##   alphaRoot
+##   alphaStem
+##   alphaLeaf
+##   alphaShell
+##   betaRoot
+##   betaStem
+##   betaLeaf
+##   betaShell
+##   kRhizome_emr
+## 
+## Module output quantities:
+##   kRoot
+##   kStem
+##   kLeaf
+##   kShell
+##   kGrain
+##   kRhizome
+## 
+## Module type (differential or direct):
+##   direct
+## 
+## Requires a fixed step size Euler ode_solver:
+##   no
+\end{verbatim}
+
+The module partitioning\_coefficient\_logistic takes ten input
+parameters (e.g., DVI, alphaRoot, alphaStem, etc.) and produces six
+output variables (kRoot, kStem, etc.), calculated at each time step. At
+any given time, the sum of all k values equals 1, ensuring mass balance
+in carbon allocation.
+
+For example, if kRoot = 1 at a particular time step, it means that 100\%
+of the assimilated carbon (via photosynthesis) is allocated to root
+growth, and no carbon is allocated to other components like stems or
+leaves.
+
+To understand how parameters like alphaRoot, alphaStem, etc., influence
+the values of kRoot, kStem, and others, refer to the following paper: 🔗
+\url{https://gmd.copernicus.org/articles/8/1139/2015/}
+
+You can also try modifying the parameter values to experiment and
+observe how the output allocation changes over time.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{parameters\_with\_modified\_partitioning }\OtherTok{\textless{}{-}}\NormalTok{ soybean}\SpecialCharTok{$}\NormalTok{parameters}
+\NormalTok{parameters\_with\_modified\_partitioning}\SpecialCharTok{$}\NormalTok{alphaLeaf }\OtherTok{=} \DecValTok{30} \CommentTok{\# original value was 23.8895}
+\NormalTok{parameters\_with\_modified\_partitioning}\SpecialCharTok{$}\NormalTok{betaLeaf }\OtherTok{=} \SpecialCharTok{{-}}\DecValTok{20} \CommentTok{\# original value was {-}18.0851}
+\NormalTok{parameters\_with\_modified\_partitioning}\SpecialCharTok{$}\NormalTok{alphaStem }\OtherTok{=} \DecValTok{30} \CommentTok{\# original value was 24.8248}
+\NormalTok{parameters\_with\_modified\_partitioning}\SpecialCharTok{$}\NormalTok{betaStem }\OtherTok{=} \SpecialCharTok{{-}}\DecValTok{20} \CommentTok{\# original value was  {-}18.5214}
+\NormalTok{parameters\_with\_modified\_partitioning}\SpecialCharTok{$}\NormalTok{alphaRoot }\OtherTok{=} \DecValTok{30} \CommentTok{\# original value was 36.967}
+\NormalTok{parameters\_with\_modified\_partitioning}\SpecialCharTok{$}\NormalTok{betaRoot }\OtherTok{=} \SpecialCharTok{{-}}\DecValTok{20} \CommentTok{\# original value was  {-}40.1915}
+\NormalTok{parameters\_with\_modified\_partitioning}\SpecialCharTok{$}\NormalTok{alphaShell }\OtherTok{=} \DecValTok{30} \CommentTok{\# original value was 13.5955}
+\NormalTok{parameters\_with\_modified\_partitioning}\SpecialCharTok{$}\NormalTok{betaShell }\OtherTok{=} \SpecialCharTok{{-}}\DecValTok{20} \CommentTok{\# original value was  {-}9.9809}
+
+\NormalTok{result\_modified }\OtherTok{\textless{}{-}}\NormalTok{ result }\OtherTok{\textless{}{-}} \FunctionTok{with}\NormalTok{(soybean, \{}\FunctionTok{run\_biocro}\NormalTok{(}
+\NormalTok{  initial\_values,}
+  \AttributeTok{parameters =}\NormalTok{ parameters\_with\_modified\_partitioning,}
+\NormalTok{  soybean\_weather}\SpecialCharTok{$}\StringTok{\textquotesingle{}2002\textquotesingle{}}\NormalTok{,}
+\NormalTok{  direct\_modules,}
+\NormalTok{  differential\_modules,}
+\NormalTok{  ode\_solver}
+\NormalTok{)\})}
+\FunctionTok{xyplot}\NormalTok{(Stem }\SpecialCharTok{+}\NormalTok{ Leaf }\SpecialCharTok{+}\NormalTok{ Root }\SpecialCharTok{+}\NormalTok{ lai }\SpecialCharTok{+}\NormalTok{ Grain }\SpecialCharTok{\textasciitilde{}}\NormalTok{ TTc, }\AttributeTok{data =}\NormalTok{ result\_modified, }\AttributeTok{type=}\StringTok{\textquotesingle{}l\textquotesingle{}}\NormalTok{, }\AttributeTok{auto =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{FinalExam_Ecophysiology_files/figure-latex/unnamed-chunk-3-1.pdf}
+You can see that the results differ significantly. This variation is due
+to changes in the parameters controlling the biomass partitioning
+modules, while all other parameters (e.g., those related to
+photosynthesis, etc.) remain unchanged.
+
+\subsection{Problem Statement}\label{problem-statement}
+
+Compare the performance of two different algorithms (from separate R
+packages) in optimizing the parameters---alphaLeaf, betaLeaf, alphaStem,
+betaStem, alphaRoot, betaRoot, alphaShell, and betaShell---to achieve
+the best match between the model predictions and the observed values
+provided below.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{observations }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"\textasciitilde{}/observed\_data.csv"}\NormalTok{)}
+\FunctionTok{kable}\NormalTok{(observations)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{longtable}[]{@{}rrrrrr@{}}
+\toprule\noalign{}
+doy & Stem & Leaf & Root & Grain & lai \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+160 & 0.13 & 0.180 & 0.15 & 0.000 & 0.600 \\
+180 & 0.95 & 0.950 & 1.22 & 0.000 & 3.000 \\
+200 & 1.70 & 1.600 & 6.40 & 0.000 & 5.500 \\
+230 & 2.50 & 2.100 & 6.50 & 0.008 & 7.200 \\
+250 & 2.60 & 1.000 & 5.80 & 2.120 & 3.300 \\
+280 & 1.80 & 0.005 & 5.30 & 4.000 & 0.005 \\
+\end{longtable}
+
+o proceed, you'll need to define an objective function that calculates
+the error between observed data and model predictions generated by
+run\_biocro. Then, use optimization techniques to minimize this error by
+tuning the parameters. You are encouraged to experiment with different
+optimization algorithms to evaluate and compare their effectiveness in
+identifying the best-fit parameter values.
+
+\subsubsection{Parvat: NMOF \& nloptr}\label{parvat-nmof-nloptr}
+
+\subsubsection{Swadha: roptim \& dfoptim}\label{swadha-roptim-dfoptim}
+
+\subsubsection{Mausumi: GenSA \& graDiEnt}\label{mausumi-gensa-gradient}
+
+\subsection{Evaluation Guidelines}\label{evaluation-guidelines}
+
+Evaluation will be based on a small report. The report should contain
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  A very brief introduction of the problem (in your own words) {[}20
+  Marks{]}
+\item
+  A brief description of the two algorithm that you are going to work
+  with {[}30 marks +30 marks{]}
+\item
+  Readibility and reproducibility of the code/script developed for
+  optimization {[}30 marks + 30 marks{]}
+\item
+  A figure showing evolution of Error with computational time/iterations
+  for both the algorithms {[}30 Marks{]}
+\item
+  A figure showing final (optimized/best) values of parameters obtained
+  by the two algorithms{[}30 marks{]}
+\item
+  Anything creative that you can put in the final report {[}Bonus: 20
+  Marks in addition to 200 (100\%){]}
+\end{enumerate}
+
+\end{document}
