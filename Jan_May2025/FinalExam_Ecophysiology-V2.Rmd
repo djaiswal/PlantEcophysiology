@@ -1,0 +1,80 @@
+---
+title: "Plant Ecophysiology FInal Exam-v2"
+notes: total 200 marks (bonus marks 20)
+output:
+  html_document: default
+  pdf_document: default
+date: "2025-04-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(PhotoGEA)
+```
+
+## Making Sense of Leaf Gas Exchange Measurement Data
+All the data are available in [this google folder](https://drive.google.com/drive/folders/19ZBM0l1MOGVw_lpdOZR_VjbBFnjfu5xv?usp=drive_link)
+You are assigned to work with the following data files:
+
+### Sajitha
++ Canna Indicia replication 3,4,6
+
+### Manish
++ Syzygium cumini replications 3,4,5
+
+
+### Haritha
++ Syzygium cumini replications 6
++ canna indica replication 7
+
+### Problem Statement
+
+Use the measured data to fit ACI curve using [PhotoGEA Package](https://github.com/eloch216/PhotoGEA)
+
+The guidelines to use photoGEA package for curve fitting are available on the photoGEA website. The specific function that you will need to use is fit_c3_aci. Instructions on how to analyze C3 aci curve data are available on the photoGEA website [subpages](https://eloch216.github.io/PhotoGEA/articles/web_only/analyzing_c3_aci_curves.html)
+
+You will need to find the values of the following parameters only:
+alpha_old, J_at_25, RL_at_25, Tp_at_25, and Vcmax_at_25.
+
+
+## Evaluation Guidelines
+Evaluation will be based on a small report. The report should contain
+
+### Brief Introduction of the five parameters – [20 Marks]
+alpha_old, J_at_25, RL_at_25, Tp_at_25, and Vcmax_at_25.
+Note that parameters alpha_old, TP_at_25 are not covered in the class but you can read Reference list at the end of this [page](https://eloch216.github.io/PhotoGEA/articles/web_only/analyzing_c3_aci_curves.html) to understand it better.
+
+You can also see [code](https://github.com/eloch216/PhotoGEA/blob/main/R/calculate_c3_assimilation.R) to understand it better and write about it.
+
+### Plots of fitted curve and Discussion – [30 Marks + 30 Marks]
+You can use function plot_c3_aci_fit or any other function to make a plot. Discuss the quality of plots and curve fitting. What can you interpret from these curves?
+
+###  Optimized Parameters & Discussion – [30 Marks + 30 Marks]
+Make a table to show all the optimized parameters. Discuss if their values make sense based on values reported in the previously published research. If photoGEA was unable to find some parameters, what can you possible do differently to find these values?
+
+### Literature Review of the photosynthesis measurements done on the same species by other people  – [30 Marks + 30 Marks]
+Has anyone published any results studying photosynthesis properties of the same species. Please provide a brief summary along with references. 
+Explore [plant trait database TRY](https://www.try-db.org/TryWeb/Home.php) to find photosynthesis & parameters related to these species, describe what these parameters are and what do they represent, and provide a brief summary using table or any other way).
+
+
+### Creative Element – [Bonus: 20 Marks (beyond the total of 200 marks)]
+Any other insight based on your experience.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
